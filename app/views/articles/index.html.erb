@@ -1,0 +1,33 @@
+<div class="max-w-4xl mx-auto">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold">Articles</h1>
+    <% if user_signed_in? %>
+      <%= link_to "Write a Story", new_article_path,
+          class: "bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700" %>
+    <% end %>
+  </div>
+
+  <div class="space-y-8">
+    <% @articles.each do |article| %>
+      <article class="border-b border-gray-200 pb-8">
+        <div class="flex items-center space-x-2 text-sm text-gray-600 mb-2">
+          <%= link_to article.user.username, "#", class: "font-medium hover:text-gray-900" %>
+          <span>·</span>
+          <time><%= article.created_at.strftime("%B %d, %Y") %></time>
+        </div>
+
+        <h2 class="text-xl font-bold mb-2">
+          <%= link_to article.title, article_path(article), class: "hover:text-gray-600" %>
+        </h2>
+
+        <div class="text-gray-600 mb-4 line-clamp-3">
+          <%= article.content.to_plain_text.truncate(200) %>
+        </div>
+
+        <div class="flex items-center text-sm text-gray-500">
+          <span><%= article.reading_time %> min read</span>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</div>

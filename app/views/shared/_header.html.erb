@@ -1,0 +1,18 @@
+<header class="bg-white shadow">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <%= link_to "MediumClone", root_path, class: "text-xl font-bold" %>
+
+      <div class="flex items-center space-x-4">
+        <% if user_signed_in? %>
+          <%= link_to "Write a Story", "#", class: "text-green-600 hover:text-green-700" %>
+          <%= link_to current_user.username, edit_user_registration_path, class: "text-gray-600 hover:text-gray-700" %>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-gray-600 hover:text-gray-700" %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "text-gray-600 hover:text-gray-700" %>
+          <%= link_to "Get Started", new_user_registration_path, class: "bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700" %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+</header>
